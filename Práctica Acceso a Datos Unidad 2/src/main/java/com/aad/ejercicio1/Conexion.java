@@ -32,7 +32,7 @@ public class Conexion {
 	void createDatabase() {
 
 		try {
-			st.executeUpdate("DROP TABLE aadu2.estudiantes;");
+			//st.executeUpdate("DROP TABLE IF EXISTS aadu2.estudiantes;");
 			st.executeUpdate("CREATE SCHEMA IF NOT EXISTS AADU2;");			
 			st.executeUpdate("CREATE TABLE IF NOT EXISTS aadu2.estudiantes (\r\n"
 					+ "id MEDIUMINT NOT NULL AUTO_INCREMENT,\r\n" + "nombre varchar(50),\r\n"
