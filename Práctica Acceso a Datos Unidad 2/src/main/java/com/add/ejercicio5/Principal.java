@@ -14,9 +14,8 @@ public class Principal {
 
 		System.out.println("Bienvenido ¿Que desea hacer?");
 		while (!salir) {
-			
-			System.out.println(
-					"\n1. Crear una BBDD\n2. Crear las tablas\n"
+
+			System.out.println("\n1. Crear una BBDD\n2. Crear las tablas\n"
 					+ "3. Listado de todos los objetos guardados \n4. Introducir un nuevo usuario "
 					+ "\n5. Buscar usuario por ID \n6. Eliminar usuario por ID"
 					+ "\n7. Actualizar un usuario por ID\n8. Borrar todo"
@@ -27,7 +26,7 @@ public class Principal {
 				int opcion = sc.nextInt();
 
 				switch (opcion) {
-				
+
 				case 0:
 					System.out.println("Adiós");
 					salir = true;
@@ -48,26 +47,25 @@ public class Principal {
 				case 4:
 					cn.insert();
 					break;
-					
+
 				case 5:
 					cn.searchByID();
 					break;
 				case 6:
 					cn.delete();
-					break;	
-				
+					break;
+
 				case 7:
 					cn.update();
 					break;
-				
+
 				case 8:
 					cn.deleteAll();
 					break;
-					
+
 				case 9:
 					cn.recoverLast();
 					break;
-				
 
 				default:
 
@@ -78,5 +76,7 @@ public class Principal {
 				sc.next();
 			}
 		}
+		
+		sc.close();
 	}
 }

@@ -1,7 +1,7 @@
 package com.aad.ejercicio1;
 
-import java.util.*;
-
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
 public class Principal {
 
@@ -36,22 +36,21 @@ public class Principal {
 				case 3:
 					connection.update();
 					break;
-					
+
 				case 4:
 					connection.delete();
 					break;
-					
+
 				case 5:
 					System.out.println("Adiós");
-					salir=true;
+					salir = true;
 					break;
 
 				default:
 
 					System.out.println("Selecciona una de las opciones");
 				}
-			
-			
+
 			} catch (InputMismatchException e) {
 				System.out.println("Debes insertar un número");
 				sc.next();

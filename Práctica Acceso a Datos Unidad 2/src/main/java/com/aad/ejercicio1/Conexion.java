@@ -8,19 +8,17 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Scanner;
 
-import com.add.ejercicio2.PoolConexiones;
-
 public class Conexion {
 
 	Connection cn;
 	Statement st;
 	ResultSet rs;
-	Scanner scanner= new Scanner(System.in);
+	Scanner scanner = new Scanner(System.in);
 
 	public Conexion() {
 
 		try {
-					
+
 			cn = DriverManager.getConnection("jdbc:h2:~/test", "sa", "");
 			st = cn.createStatement();
 
@@ -32,8 +30,8 @@ public class Conexion {
 	void createDatabase() {
 
 		try {
-			//st.executeUpdate("DROP TABLE IF EXISTS aadu2.estudiantes;");
-			st.executeUpdate("CREATE SCHEMA IF NOT EXISTS AADU2;");			
+			// st.executeUpdate("DROP TABLE IF EXISTS aadu2.estudiantes;");
+			st.executeUpdate("CREATE SCHEMA IF NOT EXISTS AADU2;");
 			st.executeUpdate("CREATE TABLE IF NOT EXISTS aadu2.estudiantes (\r\n"
 					+ "id MEDIUMINT NOT NULL AUTO_INCREMENT,\r\n" + "nombre varchar(50),\r\n"
 					+ "apellido varchar(50),\r\n" + "modulo varchar(50),\r\n" + "PRIMARY KEY (id));");
@@ -118,24 +116,24 @@ public class Conexion {
 			System.out.println(e.getMessage());
 		}
 	}
-	
+
 	void delete() {
-		
+
 		System.out.println("Introduce id: ");
 		int id = scanner.nextInt();
-		
+
 		PreparedStatement sentencia = null;
 
 		try {
-			
+
 			String sentenciaSql = "DELETE AADU2.estudiantes WHERE id = ?";
 			sentencia = cn.prepareStatement(sentenciaSql);
 			sentencia.setInt(1, id);
 			sentencia.executeUpdate();
-		
+
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
-		
+
 	}
 }

@@ -166,22 +166,20 @@ public class Conexion {
 		int id = scanner.nextInt();
 
 		try {
-			rs = st.executeQuery("select * from ejercicio5.usuarios " 
-					+ "join ejercicio5.cuentas "
+			rs = st.executeQuery("select * from ejercicio5.usuarios " + "join ejercicio5.cuentas "
 					+ "on usuarios.id_usuario = cuentas.id_usuario " + "where usuarios.id_usuario=" + id + ";");
 
 			while (rs.next()) {
-				backup += (","+rs.getString("nombre")+",");
-				backup += (rs.getString("apellido")+",");
-				backup += (rs.getString("ciudad")+",");
-				backup += (rs.getString("cuenta")+",");
-				backup += (rs.getString("nick")+",");
+				backup += ("," + rs.getString("nombre") + ",");
+				backup += (rs.getString("apellido") + ",");
+				backup += (rs.getString("ciudad") + ",");
+				backup += (rs.getString("cuenta") + ",");
+				backup += (rs.getString("nick") + ",");
 				backup += (rs.getString("suscripcion"));
 			}
 
 			st.executeUpdate("DELETE FROM ejercicio5.usuarios WHERE usuarios.id_usuario = " + id + ";");
 			System.out.println("Se ha borrado correctamente");
-			
 
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -246,16 +244,16 @@ public class Conexion {
 	}
 
 	void recoverLast() {
-		
+
 		try {
-			String nombre=backup.split(",")[1];
-			String apellido=backup.split(",")[2];
-			String ciudad=backup.split(",")[3];
-			String cuenta=backup.split(",")[4];			
-			String nick=backup.split(",")[5];
-			String suscripcion=backup.split(",")[6];
-			//null,nombre,apellido,ciudad,basica,nick,mensual
-		
+			String nombre = backup.split(",")[1];
+			String apellido = backup.split(",")[2];
+			String ciudad = backup.split(",")[3];
+			String cuenta = backup.split(",")[4];
+			String nick = backup.split(",")[5];
+			String suscripcion = backup.split(",")[6];
+			// null,nombre,apellido,ciudad,basica,nick,mensual
+
 			st.executeUpdate("INSERT INTO ejercicio5.usuarios(nombre,apellido,ciudad) VALUES ('" + nombre + "','"
 					+ apellido + "','" + ciudad + "');", Statement.RETURN_GENERATED_KEYS);
 
@@ -272,8 +270,8 @@ public class Conexion {
 
 			System.out.println("Se ha recuperado el último registro borrado");
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());			
+			System.out.println(e.getMessage());
 		}
-		
+
 	}
 }
