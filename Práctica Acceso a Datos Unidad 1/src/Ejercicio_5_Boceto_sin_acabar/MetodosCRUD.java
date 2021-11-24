@@ -1,47 +1,61 @@
 package Ejercicio_5_Boceto_sin_acabar;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.RandomAccessFile;
+import java.util.Scanner;
+
 public class MetodosCRUD {
 
-	private Cliente[] lista;
-	
+	File archivo = new File("C:\\Users\\admin\\Desktop\\a.txt");
+	RandomAccessFile lector = null;
+	String linea;
 
-	public MetodosCRUD(int filas) {
-		lista = new Cliente[filas];
-	}
+	Scanner sn = new Scanner(System.in);
 
-	public MetodosCRUD() {
-		lista = new Cliente[5];
-	}
+	{
+		try {
+			lector = new RandomAccessFile(archivo, "rw");
 
-	public void agregarCliente(Cliente c) {
+		} catch (IOException e) {
 
-		boolean encontrado = false;
-		
-		for (int i = 0; i < lista.length && !encontrado; i++) {
-			 
-				if (lista[i] == null) {
-					lista[i]= c;
-					encontrado = true;
-				}
-			
+			e.printStackTrace();
 		}
+	}
 
-		if (encontrado) {
-			System.out.println("Cliente añadido");
-		} else {
-			System.out.println("No se ha podido añadir el cliente");
+	public void agregarCliente() {
+
+		System.out.println("Introduce el nombre del cliente: ");
+		String nombre = sn.next();
+		try {
+			FileWriter escritor = new FileWriter(archivo);
+			
+			while ((linea = lector.readLine()) != null) {
+				if (linea.isEmpty()) {
+					escritor.write(nombre);
+					escritor.close();
+				}
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 
 	public void mostrarClientes() {
 
-		for (int i = 0; i < lista.length; i++) {
-			
-				if (lista[i] != null) {
-					System.out.println("Fila: " + i +  ", " + lista[i]);
+		String linea;
+		try {
+			while ((linea = lector.readLine()) != null) {
+				System.out.println(linea);
+				System.out.println("\n");
+				lector.readLine();
 
-				
 			}
+		} catch (IOException e) {
+
+			e.printStackTrace();
 		}
 	}
 
@@ -51,22 +65,5 @@ public class MetodosCRUD {
 
 	public void eliminarCliente(int id) {
 
-		boolean encontrado = false;
-		for (int i = 0; i < lista.length && !encontrado; i++) {
-			
-				if (lista[i] != null) {
-					if (lista[i].getId() == id) {
-						lista[i]= null;
-						encontrado = true;
-					}
-				}
-			
-		}
-		
-		if (encontrado) {
-			System.out.println("Cliente eliminado");
-		} else {
-			System.out.println("No existe el cliente");
-		}
 	}
 }
